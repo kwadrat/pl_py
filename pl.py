@@ -145,11 +145,7 @@ def wczytanie_pliku_do_obiektu(dane, nazwa_pliku):
 def klocek_odczyt(polecenia, dane):
     if polecenia.sa_jeszcze_elementy():
         nazwa_pliku = polecenia.pobierz()
-        if os.path.isfile(nazwa_pliku):
-            # Wczytaj calosc pliku
-            dane.wczytaj_plik(nazwa_pliku)
-        else:
-            raise RuntimeError('Brak pliku o nazwie "%s"' % nazwa_pliku)
+        wczytanie_pliku_do_obiektu(dane, nazwa_pliku)
     else:
         raise RuntimeError('Brak nazwy pliku dla opcji "i"')
 
