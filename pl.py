@@ -178,6 +178,8 @@ def obsluga_parametrow(polecenia, dane):
         rozkaz = polecenia.pobierz()
         if rozkaz == 'i':
             klocek_odczyt(polecenia, dane)
+        elif rozkaz == 'io':
+            klocek_w_miejscu(polecenia, dane)
         elif rozkaz == 'o':
             klocek_zapis(polecenia, dane)
         elif rozkaz == 'pl':
