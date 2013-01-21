@@ -172,17 +172,6 @@ def Wykonaj(polecenia, wywolanie_testowe = 1):
             tmp = dane.zabierz_dane()
             tmp = konwersja_miedzy_formatami(tmp, format_przed, format_po)
             dane.wstaw_dane(tmp)
-          if 0:
-            if (format_przed, format_po) == ('iso', 'utf8'):
-              tmp = dane.zabierz_dane()
-              tmp = konwersja_iso_utf8(tmp)
-              dane.wstaw_dane(tmp)
-            elif (format_przed, format_po) == ('utf8', 'iso'):
-              tmp = dane.zabierz_dane()
-              tmp = konwersja_utf8_iso(tmp)
-              dane.wstaw_dane(tmp)
-            else:
-              raise RuntimeError('Nieznane nazwy opcji "%s", "%s" dla opcji "pl"' % (format_przed, format_po))
         else:
           raise RuntimeError('Potrzebuje dwoch nazw formatow dla opcji "pl"')
       else:
