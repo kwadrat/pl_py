@@ -143,6 +143,37 @@ class BuforDanych:
         dane = fd.write(self.zabierz_dane())
         fd.close()
 
+def obsluga_parametrow(polecenia, dane):
+    while polecenia.sa_jeszcze_elementy():
+        rozkaz = polecenia.pobierz()
+        if rozkaz == 'i':
+            if polecenia.sa_jeszcze_elementy():
+                nazwa_pliku = polecenia.pobierz()
+                if os.path.isfile(nazwa_pliku):
+                    # Wczytaj calosc pliku
+                    dane.wczytaj_plik(nazwa_pliku)
+                else:
+                    raise RuntimeError('Brak pliku o nazwie "%s"' % nazwa_pliku)
+            else:
+                raise RuntimeError('Brak nazwy pliku dla opcji "i"')
+        elif rozkaz == 'o':
+            if polecenia.sa_jeszcze_elementy():
+                nazwa_pliku = polecenia.pobierz()
+                dane.zapis_do_pliku(nazwa_pliku)
+            else:
+                raise RuntimeError('Brak nazwy pliku dla opcji "o"')
+        elif rozkaz == 'pl':
+            if polecenia.sa_jeszcze_elementy(2):
+                format_przed = polecenia.pobierz_format()
+                format_po = polecenia.pobierz_format()
+                tmp = dane.zabierz_dane()
+                tmp = konwersja_miedzy_formatami(tmp, format_przed, format_po)
+                dane.wstaw_dane(tmp)
+            else:
+                raise RuntimeError('Potrzebuje dwoch nazw formatow dla opcji "pl"')
+        else:
+            raise RuntimeError('Nierozpoznana opcja: %s' % repr(rozkaz))
+
 def Wykonaj(polecenia, wywolanie_testowe = 1):
     dane = BuforDanych()
     if polecenia.sa_jeszcze_elementy():
