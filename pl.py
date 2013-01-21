@@ -92,7 +92,6 @@ Formaty:
   )
 )
 
-
 def wczytaj_tresc_pliku(nazwa):
   fd = open(nazwa, 'rb')
   wynik = fd.read()
