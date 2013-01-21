@@ -167,11 +167,7 @@ def obsluga_parametrow(polecenia, dane):
         if rozkaz == 'i':
             klocek_odczyt(polecenia, dane)
         elif rozkaz == 'o':
-            if polecenia.sa_jeszcze_elementy():
-                nazwa_pliku = polecenia.pobierz()
-                dane.zapis_do_pliku(nazwa_pliku)
-            else:
-                raise RuntimeError('Brak nazwy pliku dla opcji "o"')
+            klocek_zapis(polecenia, dane)
         elif rozkaz == 'pl':
             if polecenia.sa_jeszcze_elementy(2):
                 format_przed = polecenia.pobierz_format()
