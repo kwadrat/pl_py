@@ -148,6 +148,7 @@ def klocek_odczyt(polecenia, dane):
         wczytanie_pliku_do_obiektu(dane, nazwa_pliku)
     else:
         raise RuntimeError('Brak nazwy pliku dla opcji "i"')
+    return nazwa_pliku
 
 def klocek_w_miejscu(polecenia, dane):
     if polecenia.sa_jeszcze_elementy():
