@@ -197,6 +197,7 @@ def obsluga_parametrow(polecenia, dane):
             klocek_przekoduj(polecenia, dane)
         else:
             raise RuntimeError('Nierozpoznana opcja: %s' % repr(rozkaz))
+    polecenia.opcjonalnie_zapisz_w_miejscu(dane)
 
 def Wykonaj(polecenia, wywolanie_testowe = 1):
     dane = BuforDanych()
