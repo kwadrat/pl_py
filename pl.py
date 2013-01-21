@@ -135,6 +135,13 @@ class BuforDanych:
         dane = fd.write(self.zabierz_dane())
         fd.close()
 
+def wczytanie_pliku_do_obiektu(dane, nazwa_pliku):
+    if os.path.isfile(nazwa_pliku):
+        # Wczytaj calosc pliku
+        dane.wczytaj_plik(nazwa_pliku)
+    else:
+        raise RuntimeError('Brak pliku o nazwie "%s"' % nazwa_pliku)
+
 def klocek_odczyt(polecenia, dane):
     if polecenia.sa_jeszcze_elementy():
         nazwa_pliku = polecenia.pobierz()
