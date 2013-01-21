@@ -154,6 +154,13 @@ def klocek_odczyt(polecenia, dane):
     else:
         raise RuntimeError('Brak nazwy pliku dla opcji "i"')
 
+def klocek_zapis(polecenia, dane):
+    if polecenia.sa_jeszcze_elementy():
+        nazwa_pliku = polecenia.pobierz()
+        dane.zapis_do_pliku(nazwa_pliku)
+    else:
+        raise RuntimeError('Brak nazwy pliku dla opcji "o"')
+
 def obsluga_parametrow(polecenia, dane):
     while polecenia.sa_jeszcze_elementy():
         rozkaz = polecenia.pobierz()
