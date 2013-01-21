@@ -78,15 +78,7 @@ class Parametry:
 
 def informacja_obslugi_programu(wywolanie_testowe):
     if not wywolanie_testowe:
-        print '''\
-    Program do konwersji - Projekt AL (wersja Python)
-    Opcje:
-    i "plik"
-    o "plik"
-    pl f1 f2
-
-    Formaty:
-    %s''' % (
+        print opis_opcji_programu % (
       ''.join(
         map(lambda a: '%s - %s\n' % (a[0], a[2]), Formaty)
       )
