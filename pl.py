@@ -76,6 +76,11 @@ class Parametry:
         else:
             raise RuntimeError('Nieznana nazwa formatu "%s" dla opcji "pl"' % skrot)
 
+    def zapamietaj_do_zapisu(self, nazwa_do_zapisu):
+        '''
+        Parametry:
+        '''
+        self.nazwa_do_zapisu = nazwa_do_zapisu
 
 def informacja_obslugi_programu(wywolanie_testowe):
     if not wywolanie_testowe:
