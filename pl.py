@@ -82,6 +82,13 @@ class Parametry:
         '''
         self.nazwa_do_zapisu = nazwa_do_zapisu
 
+    def opcjonalnie_zapisz_w_miejscu(self, dane):
+        '''
+        Parametry:
+        '''
+        if self.nazwa_do_zapisu is not None:
+            dane.zapis_do_pliku(self.nazwa_do_zapisu)
+
 def informacja_obslugi_programu(wywolanie_testowe):
     if not wywolanie_testowe:
         print opis_opcji_programu % (
