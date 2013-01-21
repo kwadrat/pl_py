@@ -340,6 +340,7 @@ Program do konwersji - Projekt AL (wersja Python)
 Opcje:
 i "plik"
 o "plik"
+io "plik" (odczyt i zapis do tego samego pliku)
 pl f1 f2
 
 Formaty:
