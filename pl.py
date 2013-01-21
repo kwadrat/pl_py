@@ -38,6 +38,7 @@ class Parametry:
         '''
         self.lista = rozkazy
         self.konwersja_skrot_format = skrot_format()
+        self.nazwa_do_zapisu = None
 
     def sa_jeszcze_elementy(self, ile = 1):
         '''
