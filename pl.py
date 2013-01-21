@@ -153,6 +153,16 @@ def klocek_zapis(polecenia, dane):
     else:
         raise RuntimeError('Brak nazwy pliku dla opcji "o"')
 
+def klocek_przekoduj(polecenia, dane):
+    if polecenia.sa_jeszcze_elementy(2):
+        format_przed = polecenia.pobierz_format()
+        format_po = polecenia.pobierz_format()
+        tmp = dane.zabierz_dane()
+        tmp = konwersja_miedzy_formatami(tmp, format_przed, format_po)
+        dane.wstaw_dane(tmp)
+    else:
+        raise RuntimeError('Potrzebuje dwoch nazw formatow dla opcji "pl"')
+
 def obsluga_parametrow(polecenia, dane):
     while polecenia.sa_jeszcze_elementy():
         rozkaz = polecenia.pobierz()
