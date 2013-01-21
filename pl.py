@@ -168,10 +168,9 @@ def Wykonaj(polecenia, wywolanie_testowe = 1):
                 if polecenia.sa_jeszcze_elementy(2):
                     format_przed = polecenia.pobierz_format()
                     format_po = polecenia.pobierz_format()
-                    if 1:
-                        tmp = dane.zabierz_dane()
-                        tmp = konwersja_miedzy_formatami(tmp, format_przed, format_po)
-                        dane.wstaw_dane(tmp)
+                    tmp = dane.zabierz_dane()
+                    tmp = konwersja_miedzy_formatami(tmp, format_przed, format_po)
+                    dane.wstaw_dane(tmp)
                 else:
                     raise RuntimeError('Potrzebuje dwoch nazw formatow dla opcji "pl"')
             else:
