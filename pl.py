@@ -316,6 +316,16 @@ class Test_konwersja_iso_utf8(unittest.TestCase):
         wczytaj_tresc_pliku(self.nazwa_pliku_trzeci)
         )
 
+opis_opcji_programu = '''\
+Program do konwersji - Projekt AL (wersja Python)
+Opcje:
+i "plik"
+o "plik"
+pl f1 f2
+
+Formaty:
+%s'''
+
 if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1] == 'test':
         unittest.main(argv = [sys.argv[0], ])
