@@ -184,6 +184,11 @@ def klocek_przekoduj(polecenia, dane):
     else:
         raise RuntimeError('Potrzebuje dwoch nazw formatow dla opcji "pl"')
 
+def klocek_no13(dane):
+    tmp = dane.zabierz_dane()
+    tmp = tmp.replace('\r', '')
+    dane.wstaw_dane(tmp)
+
 def obsluga_parametrow(polecenia, dane):
     while polecenia.sa_jeszcze_elementy():
         rozkaz = polecenia.pobierz()
@@ -195,6 +200,8 @@ def obsluga_parametrow(polecenia, dane):
             klocek_zapis(polecenia, dane)
         elif rozkaz == 'pl':
             klocek_przekoduj(polecenia, dane)
+        elif rozkaz == 'No13':
+            klocek_no13(dane)
         else:
             raise RuntimeError('Nierozpoznana opcja: %s' % repr(rozkaz))
     polecenia.opcjonalnie_zapisz_w_miejscu(dane)
@@ -342,6 +349,7 @@ i "plik"
 o "plik"
 io "plik" (odczyt i zapis do tego samego pliku)
 pl f1 f2
+No13 (usun CR)
 
 Formaty:
 %s'''
