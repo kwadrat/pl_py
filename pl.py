@@ -7,8 +7,8 @@ import sys
 import os
 import unittest
 
-# 'acelnoszx ACELNOSZX'
-polskie_unicode = u'\u0105\u0107\u0119\u0142\u0144\xf3\u015b\u017c\u017a \u0104\u0106\u0118\u0141\u0143\xd3\u015a\u017b\u0179'
+polskie_ascii = 'acelnoszxACELNOSZX'
+polskie_unicode = u'\u0105\u0107\u0119\u0142\u0144\xf3\u015b\u017c\u017a\u0104\u0106\u0118\u0141\u0143\xd3\u015a\u017b\u0179'
 
 przykladowy_plik_zrodlowy = 'gen_plik.txt'
 przykladowy_plik_docelowy = 'gen_plik_out.txt'
@@ -189,6 +189,14 @@ def klocek_no13(dane):
     tmp = tmp.replace('\r', '')
     dane.wstaw_dane(tmp)
 
+def klocek_utf8_to_ascii(dane):
+    letter_pairs = zip(polskie_unicode, polskie_ascii)
+    tmp = dane.zabierz_dane()
+    for src, dst in letter_pairs:
+        src = konwersja_uni_utf8(src)
+        tmp = tmp.replace(src, dst)
+    dane.wstaw_dane(tmp)
+
 def obsluga_parametrow(polecenia, dane):
     while polecenia.sa_jeszcze_elementy():
         rozkaz = polecenia.pobierz()
@@ -202,6 +210,8 @@ def obsluga_parametrow(polecenia, dane):
             klocek_przekoduj(polecenia, dane)
         elif rozkaz == 'No13':
             klocek_no13(dane)
+        elif rozkaz == 'u8a':
+            klocek_utf8_to_ascii(dane)
         else:
             raise RuntimeError('Nierozpoznana opcja: %s' % repr(rozkaz))
     polecenia.opcjonalnie_zapisz_w_miejscu(dane)
@@ -341,6 +351,7 @@ o "plik"
 io "plik" (odczyt i zapis do tego samego pliku)
 pl f1 f2
 No13 (usun CR)
+u8a (reczna podmiana polskich liter UTF8 -> ASCII)
 
 Formaty:
 %s'''
