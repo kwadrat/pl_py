@@ -7,7 +7,8 @@ import sys
 import os
 import unittest
 
-polskie_ascii = 'acelnoszxACELNOSZX'
+#                       .,       .,
+polskie_ascii = 'acelnoszzACELNOSZZ'
 polskie_unicode = u'\u0105\u0107\u0119\u0142\u0144\xf3\u015b\u017c\u017a\u0104\u0106\u0118\u0141\u0143\xd3\u015a\u017b\u0179'
 
 przykladowy_plik_zrodlowy = 'gen_plik.txt'
