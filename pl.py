@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python2
 
 '''Program do konwersji standardow polskich liter,
 znakow konca linii'''
