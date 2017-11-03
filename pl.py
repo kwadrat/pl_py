@@ -229,17 +229,8 @@ def konwersja_iso_uni(napis):
 def konwersja_uni_iso(napis):
     return napis.encode('iso-8859-2')
 
-def konwersja_utf8_uni(napis):
-    return napis.decode('utf-8')
-
 def konwersja_uni_utf8(napis):
     return napis.encode('utf-8')
-
-def konwersja_iso_utf8(napis):
-    return konwersja_uni_utf8(konwersja_iso_uni(napis))
-
-def konwersja_utf8_iso(napis):
-    return konwersja_uni_iso(konwersja_utf8_uni(napis))
 
 def konwersja_miedzy_formatami(napis, przed, po):
     napis = napis.decode(przed)
