@@ -92,11 +92,11 @@ class Parametry:
 
 def informacja_obslugi_programu(wywolanie_testowe):
     if not wywolanie_testowe:
-        print opis_opcji_programu % (
+        print(opis_opcji_programu % (
       ''.join(
         map(lambda a: '%s - %s\n' % (a[0], a[2]), Formaty)
       )
-    )
+    ))
 
 def wczytaj_tresc_pliku(nazwa):
     fd = open(nazwa, 'rb')
