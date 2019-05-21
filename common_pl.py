@@ -277,7 +277,10 @@ class Test_istniejacy_plik(unittest.TestCase):
     def setUp(self):
         self.nazwa_pliku_wej = przykladowy_plik_zrodlowy
         self.nazwa_pliku_wyj = przykladowy_plik_docelowy
-        open(self.nazwa_pliku_wej, 'wb').write('abc\n')
+        out_text = 'abc\n'
+        if sys.version_info > (3, 0):
+            out_text = out_text.encode('utf-8')
+        save_to_file(self.nazwa_pliku_wej, out_text)
 
     def tearDown(self):
         usun_plik_jesli_istnieje(self.nazwa_pliku_wej)
@@ -312,7 +315,7 @@ class Test_konwersja_iso_utf8(unittest.TestCase):
         self.nazwa_pliku_trzeci = przykladowy_plik_trzeci
         tmp = konwersja_uni_utf8(polskie_unicode)
         tmp = konwersja_uni_iso(polskie_unicode)
-        open(self.nazwa_pliku_wej, 'wb').write(tmp)
+        save_to_file(self.nazwa_pliku_wej, tmp)
 
     def tearDown(self):
         usun_plik_jesli_istnieje(self.nazwa_pliku_wej)
