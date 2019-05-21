@@ -265,6 +265,13 @@ def usun_plik_jesli_istnieje(nazwa):
     if os.path.isfile(nazwa):
         os.remove(nazwa)
 
+
+def save_to_file(output_file, one_data):
+    fd = open(output_file, 'wb')
+    fd.write(one_data)
+    fd.close()
+
+
 class Test_istniejacy_plik(unittest.TestCase):
 
     def setUp(self):
