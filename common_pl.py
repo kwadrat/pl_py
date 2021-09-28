@@ -208,7 +208,7 @@ def klocek_przekoduj(polecenia, dane):
 
 def klocek_no13(dane):
     tmp = dane.zabierz_dane()
-    tmp = tmp.replace('\r', '')
+    tmp = tmp.replace(b'\r', b'')
     dane.wstaw_dane(tmp)
 
 
