@@ -18,7 +18,7 @@ przykladowy_plik_zrodlowy = 'gen_plik.txt'
 przykladowy_plik_docelowy = 'gen_plik_out.txt'
 przykladowy_plik_trzeci = 'gen_plik_trzeci.txt'
 opis_opcji_programu = '''\
-Program do konwersji - Projekt AL (wersja Python)
+Program do konwersji - Projekt AL (Advanced Logic, wersja Python)
 Opcje:
 i "plik"
 o "plik"
