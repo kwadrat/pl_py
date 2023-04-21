@@ -169,9 +169,7 @@ class BuforDanych:
 
     def zapis_do_pliku(self, nazwa_docelowego_pliku):
         out_data = self.zabierz_dane()
-        fd = open(nazwa_docelowego_pliku, 'wb')
-        fd.write(out_data)
-        fd.close()
+        save_to_file(nazwa_docelowego_pliku, out_data)
 
 
 def wczytanie_pliku_do_obiektu(dane, nazwa_pliku):
