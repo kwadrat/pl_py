@@ -118,9 +118,9 @@ def informacja_obslugi_programu(wywolanie_testowe):
 def wczytaj_tresc_pliku(nazwa):
     fd = open(nazwa, 'rb')
     wynik = fd.read()
+    fd.close()
     if ix_dia.three_or_more:
         wynik = wynik.decode(ix_dia.et_cdng_eight_utf)
-    fd.close()
     return wynik
 
 
