@@ -6,6 +6,8 @@ znakow konca linii
 ./pl.py test; red_green_bar.py $? $COLUMNS
 '''
 
+import ix_dia
+
 import sys
 import os
 import unittest
@@ -216,7 +218,10 @@ def klocek_utf8_to_ascii(dane):
     letter_pairs = zip(polskie_unicode, polskie_ascii)
     tmp = dane.zabierz_dane()
     for src, dst in letter_pairs:
-        src = konwersja_uni_utf8(src)
+        if ix_dia.three_or_more:
+            pass
+        else:
+            src = ix_dia.konwersja_uni_utf8(src)
         tmp = tmp.replace(src, dst)
     dane.wstaw_dane(tmp)
 
@@ -266,10 +271,6 @@ def konwersja_iso_uni(napis):
 
 def konwersja_uni_iso(napis):
     return napis.encode('iso-8859-2')
-
-
-def konwersja_uni_utf8(napis):
-    return napis.encode('utf-8')
 
 
 def konwersja_miedzy_formatami(napis, przed, po):
@@ -337,7 +338,7 @@ class Test_konwersja_iso_utf8(unittest.TestCase):
         self.nazwa_pliku_wej = przykladowy_plik_zrodlowy
         self.nazwa_pliku_wyj = przykladowy_plik_docelowy
         self.nazwa_pliku_trzeci = przykladowy_plik_trzeci
-        tmp = konwersja_uni_utf8(polskie_unicode)
+        tmp = ix_dia.konwersja_uni_utf8(polskie_unicode)
         tmp = konwersja_uni_iso(polskie_unicode)
         save_to_file(self.nazwa_pliku_wej, tmp)
 
