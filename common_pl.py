@@ -25,6 +25,7 @@ Opcje:
 i "plik"
 o "plik"
 io "plik" (odczyt i zapis do tego samego pliku)
+dir "katalog" (rekurencyjnie popraw pliki *.c, *.h)
 pl f1 f2
 No13 (usun CR)
 u8a (reczna podmiana polskich liter UTF8 -> ASCII)
