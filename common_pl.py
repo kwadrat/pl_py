@@ -299,7 +299,6 @@ def usun_plik_jesli_istnieje(nazwa):
 
 
 class Test_istniejacy_plik(unittest.TestCase):
-
     def setUp(self):
         self.nazwa_pliku_wej = przykladowy_plik_zrodlowy
         self.nazwa_pliku_wyj = przykladowy_plik_docelowy
@@ -331,7 +330,6 @@ class Test_istniejacy_plik(unittest.TestCase):
 
 
 class Test_konwersja_iso_utf8(unittest.TestCase):
-
     def setUp(self):
         self.nazwa_pliku_wej = przykladowy_plik_zrodlowy
         self.nazwa_pliku_wyj = przykladowy_plik_docelowy
