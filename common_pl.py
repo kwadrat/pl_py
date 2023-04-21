@@ -119,8 +119,6 @@ def wczytaj_tresc_pliku(nazwa):
     fd = open(nazwa, 'rb')
     wynik = fd.read()
     fd.close()
-    if ix_dia.three_or_more:
-        wynik = wynik.decode(ix_dia.et_cdng_eight_utf)
     return wynik
 
 
@@ -166,8 +164,6 @@ class BuforDanych:
     def zapis_do_pliku(self, nazwa_docelowego_pliku):
         fd = open(nazwa_docelowego_pliku, 'wb')
         out_data = self.zabierz_dane()
-        if ix_dia.three_or_more:
-            out_data = out_data.encode(ix_dia.et_cdng_eight_utf)
         fd.write(out_data)
         fd.close()
 
@@ -222,12 +218,16 @@ def klocek_no13(dane):
 def klocek_utf8_to_ascii(dane):
     letter_pairs = zip(polskie_unicode, polskie_ascii)
     tmp = dane.zabierz_dane()
+    if ix_dia.three_or_more:
+        tmp = tmp.decode(ix_dia.et_cdng_eight_utf)
     for src, dst in letter_pairs:
         if ix_dia.three_or_more:
             pass
         else:
             src = ix_dia.konwersja_uni_utf8(src)
         tmp = tmp.replace(src, dst)
+    if ix_dia.three_or_more:
+        tmp = tmp.encode(ix_dia.et_cdng_eight_utf)
     dane.wstaw_dane(tmp)
 
 
