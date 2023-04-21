@@ -118,6 +118,8 @@ def informacja_obslugi_programu(wywolanie_testowe):
 def wczytaj_tresc_pliku(nazwa):
     fd = open(nazwa, 'rb')
     wynik = fd.read()
+    if ix_dia.three_or_more:
+        wynik = wynik.decode(ix_dia.et_cdng_eight_utf)
     fd.close()
     return wynik
 
@@ -163,7 +165,10 @@ class BuforDanych:
 
     def zapis_do_pliku(self, nazwa_docelowego_pliku):
         fd = open(nazwa_docelowego_pliku, 'wb')
-        fd.write(self.zabierz_dane())
+        out_data = self.zabierz_dane()
+        if ix_dia.three_or_more:
+            out_data = out_data.encode(ix_dia.et_cdng_eight_utf)
+        fd.write(out_data)
         fd.close()
 
 
@@ -306,8 +311,8 @@ class Test_istniejacy_plik(unittest.TestCase):
         self.nazwa_pliku_wej = przykladowy_plik_zrodlowy
         self.nazwa_pliku_wyj = przykladowy_plik_docelowy
         out_text = 'abc\n'
-        if sys.version_info > (3, 0):
-            out_text = out_text.encode('utf-8')
+        if ix_dia.three_or_more:
+            out_text = out_text.encode(ix_dia.et_cdng_eight_utf)
         save_to_file(self.nazwa_pliku_wej, out_text)
 
     def tearDown(self):
