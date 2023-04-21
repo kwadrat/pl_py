@@ -264,61 +264,6 @@ def wczytanie_pliku_do_obiektu(dane, nazwa_pliku):
         raise RuntimeError('Brak pliku o nazwie "%s"' % nazwa_pliku)
 
 
-def klocek_odczyt(polecenia, dane):
-    if polecenia.sa_jeszcze_elementy():
-        nazwa_pliku = polecenia.pobierz()
-        wczytanie_pliku_do_obiektu(dane, nazwa_pliku)
-    else:
-        raise RuntimeError('Brak nazwy pliku dla opcji "i"')
-    return nazwa_pliku
-
-
-def klocek_w_miejscu(polecenia, dane):
-    nazwa_pliku = klocek_odczyt(polecenia, dane)
-    polecenia.zapamietaj_do_zapisu(nazwa_pliku)
-
-
-def klocek_zapis(polecenia, dane):
-    if polecenia.sa_jeszcze_elementy():
-        nazwa_pliku = polecenia.pobierz()
-        dane.zapis_do_pliku(nazwa_pliku)
-    else:
-        raise RuntimeError('Brak nazwy pliku dla opcji "o"')
-
-
-def klocek_przekoduj(polecenia, dane):
-    if polecenia.sa_jeszcze_elementy(2):
-        format_przed = polecenia.pobierz_format()
-        format_po = polecenia.pobierz_format()
-        tmp = dane.zabierz_dane()
-        tmp = konwersja_miedzy_formatami(tmp, format_przed, format_po)
-        dane.wstaw_dane(tmp)
-    else:
-        raise RuntimeError('Potrzebuje dwoch nazw formatow dla opcji "pl"')
-
-
-def klocek_no13(dane):
-    tmp = dane.zabierz_dane()
-    tmp = tmp.replace(b'\r', b'')
-    dane.wstaw_dane(tmp)
-
-
-def klocek_utf8_to_ascii(dane):
-    letter_pairs = zip(polskie_unicode, polskie_ascii)
-    tmp = dane.zabierz_dane()
-    if ix_dia.three_or_more:
-        tmp = tmp.decode(ix_dia.et_cdng_eight_utf)
-    for src, dst in letter_pairs:
-        if ix_dia.three_or_more:
-            pass
-        else:
-            src = ix_dia.konwersja_uni_utf8(src)
-        tmp = tmp.replace(src, dst)
-    if ix_dia.three_or_more:
-        tmp = tmp.encode(ix_dia.et_cdng_eight_utf)
-    dane.wstaw_dane(tmp)
-
-
 def obsluga_parametrow(polecenia, dane):
     clay_spindle = ClaySpindle()
     while polecenia.sa_jeszcze_elementy():
