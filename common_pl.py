@@ -162,8 +162,8 @@ class BuforDanych:
         self.moja_tresc = napis
 
     def zapis_do_pliku(self, nazwa_docelowego_pliku):
-        fd = open(nazwa_docelowego_pliku, 'wb')
         out_data = self.zabierz_dane()
+        fd = open(nazwa_docelowego_pliku, 'wb')
         fd.write(out_data)
         fd.close()
 
