@@ -201,7 +201,7 @@ class ClaySpindle:
         '''
         if self.state_first:
             self.state_first = 0
-            nazwa_pliku = klocek_odczyt(polecenia, dane)
+            nazwa_pliku = self.klocek_odczyt(polecenia, dane)
             polecenia.zapamietaj_do_zapisu(nazwa_pliku)
         else:
             raise RuntimeError('Ta opcja nie jest na poczatku lancucha: "io"')
