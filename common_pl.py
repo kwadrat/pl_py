@@ -167,6 +167,12 @@ class BuforDanych:
         save_to_file(nazwa_docelowego_pliku, out_data)
 
 
+def konwersja_miedzy_formatami(napis, przed, po):
+    napis = napis.decode(przed)
+    napis = napis.encode(po)
+    return napis
+
+
 class ClaySpindle:
     def __init__(self):
         '''
@@ -314,12 +320,6 @@ def konwersja_iso_uni(napis):
 
 def konwersja_uni_iso(napis):
     return napis.encode('iso-8859-2')
-
-
-def konwersja_miedzy_formatami(napis, przed, po):
-    napis = napis.decode(przed)
-    napis = napis.encode(po)
-    return napis
 
 
 class Test_nieistniejacy_plik(unittest.TestCase):
