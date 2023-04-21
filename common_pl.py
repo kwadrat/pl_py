@@ -68,21 +68,15 @@ class Parametry:
         '''
         return len(self.lista) >= ile
 
-    def pobierz(self, ile=1):
+    def pobierz(self):
         '''
         Parametry:
         '''
+        ile = 1
         if self.sa_jeszcze_elementy(ile):
-            if ile > 1:
-                wynik = self.lista[:ile]
-                self.lista = self.lista[ile:]
-                return wynik
-            elif ile == 1:
-                wynik = self.lista[0]
-                self.lista = self.lista[1:]
-                return wynik
-            else:
-                raise RuntimeError('Nie podoba mi sie ilosc %d argumentow' % ile)
+            wynik = self.lista[0]
+            self.lista = self.lista[1:]
+            return wynik
         else:
             raise RuntimeError('Chce pobrac %d argumentow, a aktualna lista to: %s' % (ile, repr(self.lista)))
 
