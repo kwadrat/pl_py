@@ -173,6 +173,14 @@ def konwersja_miedzy_formatami(napis, przed, po):
     return napis
 
 
+def wczytanie_pliku_do_obiektu(dane, nazwa_pliku):
+    if os.path.isfile(nazwa_pliku):
+        # Wczytaj calosc pliku
+        dane.wczytaj_plik(nazwa_pliku)
+    else:
+        raise RuntimeError('Brak pliku o nazwie "%s"' % nazwa_pliku)
+
+
 class ClaySpindle:
     def __init__(self):
         '''
@@ -260,14 +268,6 @@ class ClaySpindle:
         if ix_dia.three_or_more:
             tmp = tmp.encode(ix_dia.et_cdng_eight_utf)
         dane.wstaw_dane(tmp)
-
-
-def wczytanie_pliku_do_obiektu(dane, nazwa_pliku):
-    if os.path.isfile(nazwa_pliku):
-        # Wczytaj calosc pliku
-        dane.wczytaj_plik(nazwa_pliku)
-    else:
-        raise RuntimeError('Brak pliku o nazwie "%s"' % nazwa_pliku)
 
 
 def obsluga_parametrow(polecenia, dane):
