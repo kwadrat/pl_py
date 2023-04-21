@@ -35,7 +35,7 @@ Formaty:
 
 
 # Skrot klawiszowy, format dla dekodowania, nazwa opisowa
-Formaty = (
+frmt_ls = (
     ('iso', 'iso-8859-2', 'ISO-8859-2'),
     ('utf8', 'utf-8', 'UTF-8'),
     ('1250', 'cp1250', 'CP 1250'),
@@ -46,7 +46,7 @@ def skrot_format():
     '''Slownik tlumaczacy skrot wpisany z klawiatury na polecenie dekodujace
     '''
     wynik = {}
-    for skrot, format, nazwa in Formaty:
+    for skrot, format, nazwa in frmt_ls:
         wynik[skrot] = format
     return wynik
 
@@ -107,7 +107,7 @@ class Parametry:
 
 def informacja_obslugi_programu(wywolanie_testowe):
     if not wywolanie_testowe:
-        print(opis_opcji_programu % (''.join(map(lambda a: '%s - %s\n' % (a[0], a[2]), Formaty))))
+        print(opis_opcji_programu % (''.join(map(lambda a: '%s - %s\n' % (a[0], a[2]), frmt_ls))))
 
 
 def wczytaj_tresc_pliku(nazwa):
