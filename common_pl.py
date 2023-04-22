@@ -184,12 +184,12 @@ def wczytanie_pliku_do_obiektu(dane, nazwa_pliku):
 
 
 class ClaySpindle:
-    def __init__(self, dane):
+    def __init__(self):
         '''
         ClaySpindle:
         '''
         self.state_first = 1
-        self.dane = dane
+        self.dane = BuforDanych()
 
     def is_first(self):
         '''
@@ -301,8 +301,7 @@ class ClaySpindle:
 
 def Wykonaj(polecenia, wywolanie_testowe=1):
     if polecenia.sa_jeszcze_elementy():
-        dane = BuforDanych()
-        clay_spindle = ClaySpindle(dane)
+        clay_spindle = ClaySpindle()
         clay_spindle.obsluga_parametrow(polecenia)
     else:
         informacja_obslugi_programu(wywolanie_testowe)
