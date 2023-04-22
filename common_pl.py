@@ -299,31 +299,6 @@ class ClaySpindle:
         polecenia.opcjonalnie_zapisz_w_miejscu()
 
 
-def obsluga_parametrow(polecenia, dane):
-    clay_spindle = ClaySpindle(dane)
-    while polecenia.sa_jeszcze_elementy():
-        rozkaz = polecenia.pobierz()
-        if clay_spindle.is_first():
-            if rozkaz == 'i':
-                clay_spindle.klocek_odczyt(polecenia)
-            elif rozkaz == 'io':
-                clay_spindle.klocek_w_miejscu(polecenia)
-            else:
-                raise RuntimeError('Nierozpoznana wejsciowa opcja: %s' % repr(rozkaz))
-        else:
-            if rozkaz == 'o':
-                clay_spindle.klocek_zapis(polecenia)
-            elif rozkaz == 'pl':
-                clay_spindle.klocek_przekoduj(polecenia)
-            elif rozkaz == 'No13':
-                clay_spindle.klocek_no13()
-            elif rozkaz == 'u8a':
-                clay_spindle.klocek_utf8_to_ascii()
-            else:
-                raise RuntimeError('Nierozpoznana opcja: %s' % repr(rozkaz))
-    polecenia.opcjonalnie_zapisz_w_miejscu()
-
-
 def Wykonaj(polecenia, wywolanie_testowe=1):
     dane = BuforDanych()
     if polecenia.sa_jeszcze_elementy():
