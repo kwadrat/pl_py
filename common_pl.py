@@ -97,12 +97,12 @@ class Parametry:
         '''
         self.nazwa_do_zapisu = nazwa_do_zapisu
 
-    def opcjonalnie_zapisz_w_miejscu(self, dane):
+    def opcjonalnie_zapisz_w_miejscu(self):
         '''
         Parametry:
         '''
         if self.nazwa_do_zapisu is not None:
-            dane.zapis_do_pliku(self.nazwa_do_zapisu)
+            self.dane.zapis_do_pliku(self.nazwa_do_zapisu)
 
 
 def informacja_obslugi_programu(wywolanie_testowe):
@@ -195,7 +195,7 @@ class ClaySpindle:
         '''
         return self.state_first
 
-    def klocek_odczyt(self, polecenia, dane):
+    def klocek_odczyt(self, polecenia):
         '''
         ClaySpindle:
         '''
@@ -203,61 +203,61 @@ class ClaySpindle:
             self.state_first = 0
             if polecenia.sa_jeszcze_elementy():
                 nazwa_pliku = polecenia.pobierz()
-                wczytanie_pliku_do_obiektu(dane, nazwa_pliku)
+                wczytanie_pliku_do_obiektu(self.dane, nazwa_pliku)
             else:
                 raise RuntimeError('Brak nazwy pliku dla opcji "i"')
         else:
             raise RuntimeError('Ta opcja nie jest na poczatku lancucha: "i"')
         return nazwa_pliku
 
-    def klocek_w_miejscu(self, polecenia, dane):
+    def klocek_w_miejscu(self, polecenia):
         '''
         ClaySpindle:
         '''
         if self.state_first:
             self.state_first = 0
-            nazwa_pliku = self.klocek_odczyt(polecenia, dane)
+            nazwa_pliku = self.klocek_odczyt(polecenia, self.dane)
             polecenia.zapamietaj_do_zapisu(nazwa_pliku)
         else:
             raise RuntimeError('Ta opcja nie jest na poczatku lancucha: "io"')
 
-    def klocek_zapis(self, polecenia, dane):
+    def klocek_zapis(self, polecenia):
         '''
         ClaySpindle:
         '''
         if polecenia.sa_jeszcze_elementy():
             nazwa_pliku = polecenia.pobierz()
-            dane.zapis_do_pliku(nazwa_pliku)
+            self.dane.zapis_do_pliku(nazwa_pliku)
         else:
             raise RuntimeError('Brak nazwy pliku dla opcji "o"')
 
-    def klocek_przekoduj(self, polecenia, dane):
+    def klocek_przekoduj(self, polecenia):
         '''
         ClaySpindle:
         '''
         if polecenia.sa_jeszcze_elementy(2):
             format_przed = polecenia.pobierz_format()
             format_po = polecenia.pobierz_format()
-            tmp = dane.zabierz_dane()
+            tmp = self.dane.zabierz_dane()
             tmp = konwersja_miedzy_formatami(tmp, format_przed, format_po)
-            dane.wstaw_dane(tmp)
+            self.dane.wstaw_dane(tmp)
         else:
             raise RuntimeError('Potrzebuje dwoch nazw formatow dla opcji "pl"')
 
-    def klocek_no13(self, dane):
+    def klocek_no13(self):
         '''
         ClaySpindle:
         '''
-        tmp = dane.zabierz_dane()
+        tmp = self.dane.zabierz_dane()
         tmp = tmp.replace(b'\r', b'')
-        dane.wstaw_dane(tmp)
+        self.dane.wstaw_dane(tmp)
 
-    def klocek_utf8_to_ascii(self, dane):
+    def klocek_utf8_to_ascii(self):
         '''
         ClaySpindle:
         '''
         letter_pairs = zip(polskie_unicode, polskie_ascii)
-        tmp = dane.zabierz_dane()
+        tmp = self.dane.zabierz_dane()
         if ix_dia.three_or_more:
             tmp = tmp.decode(ix_dia.et_cdng_eight_utf)
         for src, dst in letter_pairs:
@@ -268,7 +268,7 @@ class ClaySpindle:
             tmp = tmp.replace(src, dst)
         if ix_dia.three_or_more:
             tmp = tmp.encode(ix_dia.et_cdng_eight_utf)
-        dane.wstaw_dane(tmp)
+        self.dane.wstaw_dane(tmp)
 
 
 def obsluga_parametrow(polecenia, dane):
@@ -277,23 +277,23 @@ def obsluga_parametrow(polecenia, dane):
         rozkaz = polecenia.pobierz()
         if clay_spindle.is_first():
             if rozkaz == 'i':
-                clay_spindle.klocek_odczyt(polecenia, dane)
+                clay_spindle.klocek_odczyt(polecenia)
             elif rozkaz == 'io':
-                clay_spindle.klocek_w_miejscu(polecenia, dane)
+                clay_spindle.klocek_w_miejscu(polecenia)
             else:
                 raise RuntimeError('Nierozpoznana wejsciowa opcja: %s' % repr(rozkaz))
         else:
             if rozkaz == 'o':
-                clay_spindle.klocek_zapis(polecenia, dane)
+                clay_spindle.klocek_zapis(polecenia)
             elif rozkaz == 'pl':
-                clay_spindle.klocek_przekoduj(polecenia, dane)
+                clay_spindle.klocek_przekoduj(polecenia)
             elif rozkaz == 'No13':
-                clay_spindle.klocek_no13(dane)
+                clay_spindle.klocek_no13()
             elif rozkaz == 'u8a':
-                clay_spindle.klocek_utf8_to_ascii(dane)
+                clay_spindle.klocek_utf8_to_ascii()
             else:
                 raise RuntimeError('Nierozpoznana opcja: %s' % repr(rozkaz))
-    polecenia.opcjonalnie_zapisz_w_miejscu(dane)
+    polecenia.opcjonalnie_zapisz_w_miejscu()
 
 
 def Wykonaj(polecenia, wywolanie_testowe=1):
