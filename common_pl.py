@@ -43,7 +43,8 @@ frmt_ls = (
 
 
 def skrot_format():
-    '''Slownik tlumaczacy skrot wpisany z klawiatury na polecenie dekodujace
+    '''
+    Slownik tlumaczacy skrot wpisany z klawiatury na polecenie dekodujace
     '''
     wynik = {}
     for skrot, format, nazwa in frmt_ls:
@@ -52,7 +53,8 @@ def skrot_format():
 
 
 class Parametry:
-    '''Obsluga listy parametrow
+    '''
+    Obsluga listy parametrow
     '''
     def __init__(self, rozkazy):
         '''
