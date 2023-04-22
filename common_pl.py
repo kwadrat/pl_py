@@ -175,14 +175,6 @@ def konwersja_miedzy_formatami(napis, przed, po):
     return napis
 
 
-def wczytanie_pliku_do_obiektu(dane, nazwa_pliku):
-    if os.path.isfile(nazwa_pliku):
-        # Wczytaj calosc pliku
-        dane.wczytaj_plik(nazwa_pliku)
-    else:
-        raise RuntimeError('Brak pliku o nazwie "%s"' % nazwa_pliku)
-
-
 class ClaySpindle:
     def __init__(self):
         '''
@@ -197,6 +189,17 @@ class ClaySpindle:
         '''
         return self.state_first
 
+    def wczytanie_pliku_do_obiektu(self, nazwa_pliku):
+        '''
+        ClaySpindle:
+        '''
+        if os.path.isfile(nazwa_pliku):
+            # Wczytaj calosc pliku
+            self.dane.wczytaj_plik(nazwa_pliku)
+        else:
+            raise RuntimeError('Brak pliku o nazwie "%s"' % nazwa_pliku)
+
+
     def klocek_odczyt(self, polecenia):
         '''
         ClaySpindle:
@@ -205,7 +208,7 @@ class ClaySpindle:
             self.state_first = 0
             if polecenia.sa_jeszcze_elementy():
                 nazwa_pliku = polecenia.pobierz()
-                wczytanie_pliku_do_obiektu(self.dane, nazwa_pliku)
+                self.wczytanie_pliku_do_obiektu(nazwa_pliku)
             else:
                 raise RuntimeError('Brak nazwy pliku dla opcji "i"')
         else:
