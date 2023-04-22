@@ -127,22 +127,37 @@ def save_to_file(output_file, one_data):
 
 class BuforDanych:
     def __init__(self):
+        '''
+        BuforDanych:
+        '''
         self.byl_odczyt = 0
         self.zerowanie()
 
     def zerowanie(self):
+        '''
+        BuforDanych:
+        '''
         self.moja_tresc = None
 
     def poprawny_jednokrotny_odczyt(self):
+        '''
+        BuforDanych:
+        '''
         if self.byl_odczyt:
             raise RuntimeError('Wykryto ponowny odczyt')
         self.byl_odczyt = 1
 
     def wczytaj_plik(self, nazwa_wejsciowego_pliku):
+        '''
+        BuforDanych:
+        '''
         self.poprawny_jednokrotny_odczyt()
         self.moja_tresc = wczytaj_tresc_pliku(nazwa_wejsciowego_pliku)
 
     def wczytaj_stdin(self):
+        '''
+        BuforDanych:
+        '''
         self.poprawny_jednokrotny_odczyt()
         wynik = []
         pracuj = 1
@@ -155,6 +170,9 @@ class BuforDanych:
         return ''.join(wynik)
 
     def zabierz_dane(self):
+        '''
+        BuforDanych:
+        '''
         if self.moja_tresc is None:
             self.moja_tresc = self.wczytaj_stdin()
         wynik = self.moja_tresc
@@ -162,9 +180,15 @@ class BuforDanych:
         return wynik
 
     def wstaw_dane(self, napis):
+        '''
+        BuforDanych:
+        '''
         self.moja_tresc = napis
 
     def zapis_do_pliku(self, nazwa_docelowego_pliku):
+        '''
+        BuforDanych:
+        '''
         out_data = self.zabierz_dane()
         save_to_file(nazwa_docelowego_pliku, out_data)
 
