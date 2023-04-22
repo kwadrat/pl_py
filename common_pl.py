@@ -300,8 +300,8 @@ class ClaySpindle:
 
 
 def Wykonaj(polecenia, wywolanie_testowe=1):
-    dane = BuforDanych()
     if polecenia.sa_jeszcze_elementy():
+        dane = BuforDanych()
         clay_spindle = ClaySpindle(dane)
         clay_spindle.obsluga_parametrow(polecenia)
     else:
