@@ -223,7 +223,6 @@ class ClaySpindle:
         else:
             raise RuntimeError('Brak pliku o nazwie "%s"' % nazwa_pliku)
 
-
     def klocek_odczyt(self, polecenia):
         '''
         ClaySpindle:
