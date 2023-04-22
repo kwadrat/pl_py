@@ -272,6 +272,32 @@ class ClaySpindle:
             tmp = tmp.encode(ix_dia.et_cdng_eight_utf)
         self.dane.wstaw_dane(tmp)
 
+    def obsluga_parametrow(self, polecenia):
+        '''
+        ClaySpindle:
+        '''
+        while polecenia.sa_jeszcze_elementy():
+            rozkaz = polecenia.pobierz()
+            if self.is_first():
+                if rozkaz == 'i':
+                    self.klocek_odczyt(polecenia)
+                elif rozkaz == 'io':
+                    self.klocek_w_miejscu(polecenia)
+                else:
+                    raise RuntimeError('Nierozpoznana wejsciowa opcja: %s' % repr(rozkaz))
+            else:
+                if rozkaz == 'o':
+                    self.klocek_zapis(polecenia)
+                elif rozkaz == 'pl':
+                    self.klocek_przekoduj(polecenia)
+                elif rozkaz == 'No13':
+                    self.klocek_no13()
+                elif rozkaz == 'u8a':
+                    self.klocek_utf8_to_ascii()
+                else:
+                    raise RuntimeError('Nierozpoznana opcja: %s' % repr(rozkaz))
+        polecenia.opcjonalnie_zapisz_w_miejscu()
+
 
 def obsluga_parametrow(polecenia, dane):
     clay_spindle = ClaySpindle(dane)
