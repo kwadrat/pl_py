@@ -182,11 +182,12 @@ def wczytanie_pliku_do_obiektu(dane, nazwa_pliku):
 
 
 class ClaySpindle:
-    def __init__(self):
+    def __init__(self, dane):
         '''
         ClaySpindle:
         '''
         self.state_first = 1
+        self.dane = dane
 
     def is_first(self):
         '''
@@ -271,7 +272,7 @@ class ClaySpindle:
 
 
 def obsluga_parametrow(polecenia, dane):
-    clay_spindle = ClaySpindle()
+    clay_spindle = ClaySpindle(dane)
     while polecenia.sa_jeszcze_elementy():
         rozkaz = polecenia.pobierz()
         if clay_spindle.is_first():
